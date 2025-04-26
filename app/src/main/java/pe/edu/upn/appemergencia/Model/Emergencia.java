@@ -48,7 +48,4 @@ public class Emergencia {
                 " y " + (urgente? " es " : " no es ") +
                 " " +" urgente ";
     }
-
-
-
 }

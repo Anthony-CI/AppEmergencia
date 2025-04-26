@@ -1,5 +1,6 @@
 package pe.edu.upn.appemergencia;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.graphics.Insets;
@@ -47,6 +49,7 @@ public class ActividadRegistrar extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.ly_registrar);
+        uriFoto=null;
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -130,6 +133,38 @@ public class ActividadRegistrar extends AppCompatActivity {
         //Utilizar la clase DAOEmergencia para registrar objetoEmergencia a la lista
         DAOEmergencia.getInstacia().insertarEmergencia(oE);
         Toast.makeText(this,"Registro Aceptado",Toast.LENGTH_LONG).show();
-        finish();
+        CuadroDialogo();
+    }
+
+    private void CuadroDialogo() {
+        AlertDialog.Builder oDialogo = new AlertDialog.Builder(this);
+        oDialogo.setTitle("Aviso");
+        oDialogo.setMessage("¿Desea seguir Registarndo Emergencia?");
+        oDialogo.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+                ActividadRegistrar.this.finish();
+            }
+        });
+        oDialogo.setPositiveButton("si", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                limpiar();
+            }
+        });
+        oDialogo.show();
+    }
+
+    private void limpiar() {
+        txtDescripcion.setText("");
+        txtTipoEmergencia.setText("");
+        rBaja.setChecked(false);
+        rbmedia.setChecked(false);
+        rbAlta.setChecked(false);
+        cbxUrgente.setChecked(false);
+        uriFoto = null;
+        imgFoto.setImageResource(R.drawable.faltafoto);
+
     }
 }
