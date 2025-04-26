@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ActividadRegistrar">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/actionBarSize"
+        android:background="@color/rojo_500"
+        app:title="Registrar"
+        app:titleTextColor="@color/white"
+        />
+    </com.google.android.material.appbar.AppBarLayout>
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Registrar emergencia"
+                android:gravity="center_horizontal"
+                style="@style/EstiloTextoTitulo"
+                />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Ingresar descripción de emergencia"
+                app:startIconDrawable="@drawable/baseline_app_registration_24"
+                >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txtDescripcion"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                     />
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Seleccionar tipo emergencia"
+                app:startIconDrawable="@drawable/baseline_approval_24"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                >
+
+                <AutoCompleteTextView
+                    android:id="@+id/spListaTipoEmergencia"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="none"
+                    tools:ignore="SpeakableTextPresentCheck"></AutoCompleteTextView>
+            </com.google.android.material.textfield.TextInputLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:textColor="@color/black"
+                android:text="Gravedad:"
+                />
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                >
+               <com.google.android.material.radiobutton.MaterialRadioButton
+                   android:id="@+id/rbBaja"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="Baja"
+                   />
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/rbMedia"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Media"
+                    />
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/rbAlta"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Alta"
+                    />
+            </RadioGroup>
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/cbxUrgente"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:text="¿Es urgente?"
+                />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSeleccionarFoto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:text="Selecionar Foto"
+                />
+            <ImageView
+                android:id="@+id/imgFoto"
+                android:layout_width="100dp"
+                android:layout_height="120dp"/>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/FAB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        android:background="@color/rojo_800"
+        android:src="@drawable/baseline_add_circle_24"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

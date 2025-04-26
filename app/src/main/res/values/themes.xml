@@ -1,0 +1,21 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.AppEmergencia" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <item name="colorPrimary">@color/rojo_500</item>
+        <item name="colorPrimaryDark">@color/rojo_700</item>
+        <item name="colorAccent">@color/rojo_800</item>
+    </style>
+
+    <style name="Theme.AppEmergencia" parent="Base.Theme.AppEmergencia" />
+
+    <style name="EstiloTextoTitulo" parent="TextAppearance.MaterialComponents.Headline5">
+        <item name="android:textColor">@color/rojo_500</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_marginBottom">16dp</item>
+        <item name="android:shadowColor">@color/rojo_800</item>
+        <item name="android:shadowDx">5</item>
+        <item name="android:shadowDy">5</item>
+        <item name="android:shadowRadius">5</item>
+    </style>
+</resources>
