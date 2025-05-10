@@ -12,7 +12,9 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import pe.edu.upn.appemergencia.Access.DAOEmergencia;
+import pe.edu.upn.appemergencia.Access.DAOEmergenciaDB;
 import pe.edu.upn.appemergencia.Model.Emergencia;
+import pe.edu.upn.appemergencia.Model.EmergenciaDB;
 
 public class ActivityMostrar extends AppCompatActivity {
     private ListView lista;
@@ -26,8 +28,13 @@ public class ActivityMostrar extends AppCompatActivity {
         //se modifica el archivo manifieto para mostrar la fecha de regreso
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         lista = findViewById(R.id.lvListaEmergencia);
-        lista.setAdapter(new ArrayAdapter<Emergencia>(this,
+//        lista.setAdapter(new ArrayAdapter<Emergencia>(this,
+//                android.R.layout.simple_list_item_1,
+//                DAOEmergencia.getInstacia().mostrarEmergencia()));
+
+        DAOEmergenciaDB oBD= new DAOEmergenciaDB(this);
+        lista.setAdapter(new ArrayAdapter<EmergenciaDB>(this,
                 android.R.layout.simple_list_item_1,
-                DAOEmergencia.getInstacia().mostrarEmergencia()));
+                oBD.getListadoEmergencia()));
     }
 }

@@ -2,6 +2,7 @@ package pe.edu.upn.appemergencia;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -27,8 +28,12 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.radiobutton.MaterialRadioButton;
 import com.google.android.material.textfield.TextInputEditText;
 
+import java.io.ByteArrayOutputStream;
+
 import pe.edu.upn.appemergencia.Access.DAOEmergencia;
+import pe.edu.upn.appemergencia.Access.DAOEmergenciaDB;
 import pe.edu.upn.appemergencia.Model.Emergencia;
+import pe.edu.upn.appemergencia.Model.EmergenciaDB;
 
 public class ActividadRegistrar extends AppCompatActivity {
 
@@ -43,6 +48,8 @@ public class ActividadRegistrar extends AppCompatActivity {
     //actividad sistema de galeria
     private ActivityResultLauncher<Intent> irActividaGaleriaFoto;
     private FloatingActionButton btnGrabar;
+
+    private byte [] imgImagenSeleccionada=null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +73,8 @@ public class ActividadRegistrar extends AppCompatActivity {
         btnGrabar = findViewById(R.id.FAB);
 
 
+
+
         txtTipoEmergencia.setAdapter(new ArrayAdapter<String>(this,
                 android.R.layout.simple_dropdown_item_1line,
                 vTipoEmergencia));
@@ -86,6 +95,13 @@ public class ActividadRegistrar extends AppCompatActivity {
                           if(result.getResultCode()==RESULT_OK && result.getData()!=null){
                               uriFoto = result.getData().getData();
                               imgFoto.setImageURI(uriFoto);
+
+                              //combertir de uri a byte[]
+                              imgFoto.buildDrawingCache(); //le decimos que se guarde la imagen en cache
+                              Bitmap oGrafico= imgFoto.getDrawingCache();
+                              ByteArrayOutputStream oFlujo= new ByteArrayOutputStream();
+                              oGrafico.compress(Bitmap.CompressFormat.PNG, 0,oFlujo);
+                              imgImagenSeleccionada = oFlujo.toByteArray();
                           }
                 });
         //crear un disparador
@@ -128,12 +144,29 @@ public class ActividadRegistrar extends AppCompatActivity {
         }
 
         boolean urgencia = cbxUrgente.isChecked();
-        //crear objeto emergencia
-        Emergencia oE = new Emergencia(descripcion,tipoEmergencia,gravedad,urgencia,uriFoto);
-        //Utilizar la clase DAOEmergencia para registrar objetoEmergencia a la lista
-        DAOEmergencia.getInstacia().insertarEmergencia(oE);
-        Toast.makeText(this,"Registro Aceptado",Toast.LENGTH_LONG).show();
+//        //crear objeto emergencia
+//        Emergencia oE = new Emergencia(descripcion,tipoEmergencia,gravedad,urgencia,uriFoto);
+//        //Utilizar la clase DAOEmergencia para registrar objetoEmergencia a la lista
+//        DAOEmergencia.getInstacia().insertarEmergencia(oE);
+
+        //Crrear objeto Emergencia con la base de datos
+        EmergenciaDB oE= new EmergenciaDB(descripcion,
+                tipoEmergencia,
+                gravedad,
+                urgencia,
+                imgImagenSeleccionada);
+
+        DAOEmergenciaDB oBDEmergencia= new DAOEmergenciaDB(this);
+        String rpta = oBDEmergencia.addEmergenciaBD(oE);
+        if(rpta == "OK"){
+            Toast.makeText(this,"Registro Aceptado" ,Toast.LENGTH_LONG).show();
+        }else {
+            Toast.makeText(this,rpta,Toast.LENGTH_LONG).show();
+
+        }
         CuadroDialogo();
+
+
     }
 
     private void CuadroDialogo() {

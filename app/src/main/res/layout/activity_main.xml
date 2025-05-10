@@ -18,6 +18,12 @@
         app:title="Aplicación de Emergencia"
         app:titleTextColor="@color/white"
         />
+
+    <TextView
+        android:id="@+id/lbMensajePrincipal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="lbVeces" />
 </com.google.android.material.appbar.AppBarLayout>
 
     <ImageView

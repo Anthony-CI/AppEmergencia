@@ -40,4 +40,7 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+    //agregando libreias para ser implemntadas
+    implementation("androidx.recyclerview:recyclerview:1.3.2")
+    implementation("de.hdodenhof:circleimageview:3.1.0")
 }
