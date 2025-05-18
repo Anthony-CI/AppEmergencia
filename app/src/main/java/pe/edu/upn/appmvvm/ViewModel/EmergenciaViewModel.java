@@ -22,10 +22,10 @@ public class EmergenciaViewModel extends ViewModel {
         }
          */
 
-        public LiveData<String> getResultado(){
-            return oLiveData;
-        }
+    }
 
+    public LiveData<String> getResultado(){
+        return oLiveData;
     }
 
 }

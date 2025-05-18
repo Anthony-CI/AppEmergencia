@@ -52,7 +52,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        oViewModelE.
+        oViewModelE.getResultado().observe(this,result ->{
+            lbRespuesta.setText(result);
+        });
 
 
     }
